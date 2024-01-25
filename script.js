@@ -2,10 +2,12 @@ const canvas = document.getElementById('drawingCanvas');
 const ctx = canvas.getContext('2d');
 let drawing = false;
 
-const doNothingButton = document.getElementById('doNothingButton');
+const submitButton = document.getElementById('submitButton');
 
-doNothingButton.addEventListener('click', function() {
-    // Do nothing
+submitButton.addEventListener('click', function() {
+    const drawingDataUrl = canvas.toDataURL();
+
+    console.log(drawingDataUrl);
 });
 
 // Set canvas size to the screen size
