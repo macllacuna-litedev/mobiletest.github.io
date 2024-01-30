@@ -5,10 +5,13 @@ let drawing = false;
 const submitButton = document.getElementById('submitButton');
 
 submitButton.addEventListener('click', function() {
-    const drawingDataUrl = canvas.toDataURL();
+    var imageDataURL = canvas.toDataURL('image/png');
 
-    console.log(drawingDataUrl);
+    var image = new Image();
+
+    image.src = imageDataURL;
 });
+
 
 // Set canvas size to the screen size
 canvas.width = window.innerWidth;
@@ -33,9 +36,12 @@ function startDrawing(e) {
 function draw(e) {
     if (!drawing) return;
 
-    // Get the position of the touch or mouse event
-    const x = e.clientX || e.touches[0].clientX;
-    const y = e.clientY || e.touches[0].clientY;
+     // Get the position of the canvas on the page
+     const canvasRect = canvas.getBoundingClientRect();
+
+     // Calculate the mouse or touch coordinates relative to the canvas
+     const x = (e.clientX || e.touches[0].clientX) - canvasRect.left;
+     const y = (e.clientY || e.touches[0].clientY) - canvasRect.top;
 
     // Set drawing styles
     ctx.lineWidth = 5;
